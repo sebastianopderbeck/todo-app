@@ -1,10 +1,11 @@
 import React from "react";
-import { Task, useTasks } from "./taskProvider.tsx";
 import { NewTask } from "./newTask.tsx";
 import { TaskDetail } from "./taskDetail.tsx";
 import { DndProvider, useDrop } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import _ from "lodash";
+import {useTasks} from "../context/taskProvider";
+import {Task} from "../types/taskTypes";
 
 interface TaskColumnProps {
     status: string;

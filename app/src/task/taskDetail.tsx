@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { useDrag } from "react-dnd";
 import { TextField, Button } from "@mui/material";
 import { DragIndicator } from "@mui/icons-material";
-import { useTasks } from "./taskProvider.tsx";
+import {useTasks} from "../context/taskProvider";
 
 interface TaskProps {
     id: string;
