@@ -2,7 +2,7 @@ import React, { useEffect, useState, createContext, useContext } from "react";
 import axios from "axios";
 
 // Task type interface
-interface Task {
+export interface Task {
     id: string;
     title: string;
     description: string;
@@ -25,6 +25,7 @@ export const TaskProvider = ({ children }: { children: React.ReactNode }) => {
             {id: 1, title: "asd1", description: "pending", order: 1, status: "pending"},
             {id: 2, title: "asd2", description: "progress", order: 2, status: "in-progress"},
             {id: 3, title: "asd3", description: "completed", order: 3, status: "completed"},
+            {id: 4, title: "asd4", description: "completed 2", order: 1, status: "completed"},
         ])
         //axios.get(API_URL).then((res) => setTasks(res.data));
     }, []);

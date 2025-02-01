@@ -1,53 +1,57 @@
 import React, { useState } from "react";
-import { Checkbox, TextField } from "@mui/material";
+import { Checkbox, TextField, IconButton } from "@mui/material";
 import { DeleteOutline } from "@mui/icons-material";
 import { useTasks } from "./taskProvider.tsx";
 
-export const TaskDetail = (task) => {
+export const TaskDetail = ({ id, title, description, status }) => {
     const { updateTask, deleteTask } = useTasks();
     const [isEditing, setIsEditing] = useState(false);
-    const [editedTask, setEditedTask] = useState(task);
+    const [editedTask, setEditedTask] = useState({ id, title, description, status });
 
     const handleEditChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setEditedTask({ ...editedTask, [e.target.name]: e.target.value });
     };
 
+    const handleSave = () => {
+        updateTask(editedTask);
+        setIsEditing(false);
+    };
     return (
-        <div className="flex items-center justify-between p-1 w-full hover:bg-blue-100">
-            <div className="flex items-center justify-center gap-2 w-full cursor-pointer" onClick={() => setIsEditing(true)}>
+            <div className="flex items-center p-2 bg-white rounded-lg shadow-sm hover:bg-gray-100">
                 <Checkbox
-                    checked={task.status === "completed"}
-                    onChange={() => updateTask({ ...task, status: task.status === "completed" ? "pending" : "completed" })}
+                    checked={status === "completed"}
+                    onChange={() => updateTask({ ...editedTask, status: "completed" })}
                 />
-
                 <div className="w-full">
                     {isEditing ? (
-                        <div className="flex flex-col gap-2">
+                        <div className="flex flex-col gap-1">
                             <TextField
-                                label={"title"}
                                 variant="standard"
                                 name="title"
                                 value={editedTask.title}
                                 onChange={handleEditChange}
+                                onBlur={handleSave}
                                 autoFocus
                             />
                             <TextField
-                                label={"description"}
                                 variant="standard"
                                 name="description"
                                 value={editedTask.description}
                                 onChange={handleEditChange}
+                                onBlur={handleSave}
                             />
                         </div>
                     ) : (
-                        <div onClick={() => setIsEditing(true)}>
-                            <p className="text-sm font-medium">{task.title}</p>
-                            <p className="text-xs text-gray-600">{task.description}</p>
+                        <div className="cursor-pointer w-full" onClick={() => setIsEditing(true)}>
+                            <p className="text-sm font-medium">{title}</p>
+                            <p className="text-xs text-gray-500">{description}</p>
                         </div>
                     )}
                 </div>
-                <DeleteOutline className="hover:text-sky-900 text-sky-700 cursor-pointer" onClick={() => deleteTask(task.id)}/>
+
+                <IconButton onClick={() => deleteTask(id)}>
+                    <DeleteOutline className="text-sky-700 hover:text-sky-800" />
+                </IconButton>
             </div>
-        </div>
     );
 };
