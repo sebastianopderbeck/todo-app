@@ -1,8 +1,9 @@
 import React from "react";
 import { Button, FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material";
 import { AddCircle } from "@mui/icons-material";
-import {Task, useTasks} from "./taskProvider.tsx";
 import { useState } from "react";
+import {useTasks} from "../context/taskProvider";
+import {Task} from "../types/taskTypes";
 
 const DEFAULT_TASK: Omit<Task, "id"> = { title: "", description: "", status: "pending", order: 0 };
 
