@@ -4,7 +4,8 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "bun vite",
+    "dev:bun": "bun vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "start": "node dist/index.js",
@@ -15,7 +16,6 @@
     "@emotion/styled": "^11.14.0",
     "@mui/icons-material": "^6.4.2",
     "@mui/material": "^6.4.2",
-    "@tailwindcss/vite": "^4.0.3",
     "axios": "^1.7.9",
     "lodash": "^4.17.21",
     "react": "^18.3.1",
@@ -27,18 +27,16 @@
     "tailwindcss": "^4.0.3"
   },
   "devDependencies": {
-    "@eslint/js": "^9.17.0",
-    "@types/lodash": "^4.17.15",
-    "@types/react": "^18.3.18",
-    "@types/react-dom": "^18.3.5",
+    "@tailwindcss/postcss": "^4.0.3",
+    "@tailwindcss/vite": "^4.0.3",
     "@vitejs/plugin-react": "^4.3.4",
-    "@vitejs/plugin-react-swc": "^3.5.0",
+    "autoprefixer": "^10.4.20",
     "eslint": "^9.17.0",
-    "eslint-plugin-react-hooks": "^5.0.0",
-    "eslint-plugin-react-refresh": "^0.4.16",
-    "globals": "^15.14.0",
-    "typescript": "~5.6.2",
-    "typescript-eslint": "^8.18.2",
+    "postcss": "^8.5.1",
     "vite": "^6.0.5"
+  },
+  "engines": {
+    "node": ">=22.0.0",
+    "bun": ">=1.0.0"
   }
 }
