@@ -55,7 +55,7 @@ export const TaskDetail: React.FC<TaskDetailProps> = ({ task, isEditing, setIsEd
     };
 
     return (
-        <div ref={taskRef} className="relative flex flex-col p-2 bg-white rounded-e-lg shadow-sm w-full" onClick={() => !isEditing && setIsEditing(true)}>
+        <div ref={taskRef} className={`relative flex flex-col p-2 bg-white ${isEditing ? "rounded-lg" : "rounded-e-lg"}  shadow-sm w-full`} onClick={() => !isEditing && setIsEditing(true)}>
             <div className="w-full">
                 {isEditing ? (
                     <div className="flex flex-col gap-2">
