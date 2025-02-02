@@ -23,7 +23,6 @@ export const TaskProvider = ({ children }: { children: React.ReactNode }) => {
     const addTask = async (task: Omit<Task, "_id">) => {
         try {
             const newTask = await createTask(task);
-            console.log(newTask)
             setTasks([...tasks, newTask]);
         } catch (error) {
             console.error("Error creating task:", error);

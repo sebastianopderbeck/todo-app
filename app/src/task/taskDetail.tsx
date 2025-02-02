@@ -1,39 +1,18 @@
-import React, { useState, useRef, useEffect } from "react";
-import { useDrag } from "react-dnd";
+import React, { useRef, useEffect, useState } from "react";
 import { TextField, Button } from "@mui/material";
-import { DragIndicator } from "@mui/icons-material";
-import {useTasks} from "../context/taskProvider";
-import {Task} from "../types/taskTypes";
+import { useTasks } from "../context/taskProvider";
+import { Task } from "../types/taskTypes";
 
-export const TaskDetail: React.FC<Task> = ({ _id, title, description, status }) => {
+interface TaskDetailProps {
+    task: Task;
+    isEditing: boolean;
+    setIsEditing: (editing: boolean) => void;
+}
+
+export const TaskDetail: React.FC<TaskDetailProps> = ({ task, isEditing, setIsEditing }) => {
     const { modifyTask, removeTask } = useTasks();
-    const [isEditing, setIsEditing] = useState(false);
-    const [editedTask, setEditedTask] = useState({ _id, title, description, status });
-    const [originalTask, setOriginalTask] = useState({ _id, title, description, status });
+    const [editedTask, setEditedTask] = useState<Task>({ ...task }); // Estado local para edición
     const taskRef = useRef<HTMLDivElement>(null);
-
-    const [{ isDragging }, drag] = useDrag(() => ({
-        type: "TASK",
-        item: { _id, title, description, status },
-        collect: (monitor) => ({
-            isDragging: !!monitor.isDragging(),
-        }),
-        canDrag: !isEditing,
-    }));
-
-    const handleEditChange = (e: React.ChangeEvent<{ name?: string; value: unknown }>) => {
-        setEditedTask((prev) => ({ ...prev, [e.target.name as string]: e.target.value }));
-    };
-
-    const handleSave = () => {
-        modifyTask(editedTask);
-        setIsEditing(false);
-    };
-
-    const handleCancel = () => {
-        setEditedTask(originalTask);
-        setIsEditing(false);
-    };
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -51,23 +30,25 @@ export const TaskDetail: React.FC<Task> = ({ _id, title, description, status }) 
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
-    }, [isEditing]);
+    }, [isEditing, setIsEditing]);
+
+    const handleEditChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setEditedTask((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    };
+
+    const handleSave = () => {
+        modifyTask(editedTask);
+        setIsEditing(false);
+    };
+
+    const handleCancel = () => {
+        setEditedTask({ ...task });
+        setIsEditing(false);
+    };
 
     return (
-        <div
-            ref={taskRef}
-            className={`flex items-center p-2 bg-white rounded-lg shadow-sm hover:bg-gray-100 transition ${
-                isDragging ? "opacity-50" : "opacity-100"
-            }`}
-            onClick={() => !isEditing && setIsEditing(true)}
-        >
-            {!isEditing && (
-                <div ref={drag} className="cursor-move p-2" onClick={(e) => e.stopPropagation()}>
-                    <DragIndicator className="text-gray-500" />
-                </div>
-            )}
-
-            <div className="w-full cursor-pointer">
+        <div ref={taskRef} className="relative flex flex-col p-2 bg-white rounded-e-lg shadow-sm w-full" onClick={() => !isEditing && setIsEditing(true)}>
+            <div className="w-full">
                 {isEditing ? (
                     <div className="flex flex-col gap-2">
                         <TextField
@@ -87,34 +68,24 @@ export const TaskDetail: React.FC<Task> = ({ _id, title, description, status }) 
                         />
                     </div>
                 ) : (
-                    <div className="w-full">
-                        <p className="text-sm font-medium">{title}</p>
-                        <p className="text-xs text-gray-500">{description}</p>
+                    <div>
+                        <p className="text-sm font-medium">{task.title}</p>
+                        <p className="text-xs text-gray-500">{task.description}</p>
                     </div>
                 )}
             </div>
 
             {isEditing && (
-                <div className="fixed bottom-0 left-0 w-full bg-white p-3 shadow-md border-t border-gray-300 flex justify-end gap-4">
-                    <Button
-                        variant="outlined"
-                        onClick={handleCancel}
-                        className="text-blue-400 text-sm !capitalize underline cursor-pointer"
-                    >
+                <div className="fixed bottom-0 left-0 w-full bg-white p-3 text-sm shadow-md border-t border-gray-300 flex justify-end gap-4">
+                    <Button variant="outlined" onClick={handleCancel} color="info" className="!capitalize">
                         Cancel
                     </Button>
-                    <Button
-                        onClick={() => removeTask(_id)}
-                        color="error"
-                        variant="contained"
-                        className="text-sm !capitalize"
-                    >
+                    <Button variant="contained" onClick={() => removeTask(task._id)} color="error" className="!capitalize">
                         Delete
                     </Button>
-                    <Button onClick={handleSave} color="primary" variant="contained" className="text-sm !capitalize">
+                    <Button variant="contained" onClick={handleSave} color="primary" className="!capitalize">
                         Save
                     </Button>
-
                 </div>
             )}
         </div>
