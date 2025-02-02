@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Task } from "../types/taskTypes";
 
-const API_URL = "http://localhost:8000/tasks";
+const API_URL = "http://backend:8000/api/tasks";
 
 export const getTasks = async (): Promise<Task[]> => {
     const response = await axios.get<Task[]>(API_URL);
