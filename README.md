@@ -1,50 +1,93 @@
-# React + TypeScript + Vite
+# Proyecto con Docker Compose
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este proyecto utiliza **Docker Compose** para configurar y ejecutar un entorno de desarrollo completo con **Frontend (Bun + React)**, **Backend (FastAPI + Python)** y **MongoDB**.
 
-Currently, two official plugins are available:
+## 📌 Requisitos previos
+Asegúrate de tener instalado en tu sistema:
+- [Docker](https://www.docker.com/get-started)
+- [Docker Compose](https://docs.docker.com/compose/install/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## 📂 Estructura del Proyecto
+```
+./
+├── app/            # Código del frontend (Bun + React)
+│   ├── Dockerfile  # Dockerfile del frontend
+│   ├── src/
+│   ├── public/
+│   └── package.json
+│
+├── server/         # Código del backend (FastAPI + Python)
+│   ├── Dockerfile  # Dockerfile del backend
+│   ├── main.py     # Archivo principal de FastAPI
+│   ├── requirements.txt  # Dependencias de Python
+│   └── ...
+│
+├── docker-compose.yml  # Definición de los servicios con Docker Compose
+└── README.md  # Documentación del proyecto
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## 🚀 Cómo ejecutar el proyecto
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+1. **Clonar el repositorio**
+   ```sh
+   git clone https://github.com/tu-usuario/tu-repo.git
+   cd tu-repo
+   ```
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+2. **Levantar los contenedores**
+   ```sh
+   docker-compose up --build
+   ```
+
+3. **Acceder a las aplicaciones**
+    - **Frontend:** [http://localhost:9001](http://localhost:9001)
+    - **Backend (FastAPI docs):** [http://localhost:8000/docs](http://localhost:8000/docs)
+    - **MongoDB (puerto expuesto):** `27017`
+
+## 📦 Descripción de los Servicios
+
+### **Frontend (Bun + React)**
+- Ubicado en la carpeta `app/`.
+- Usa el `bun` como gestor de paquetes y entorno de ejecución.
+- Expone el puerto `9001`.
+- Se ejecuta con:
+  ```sh
+  bun run dev
+  ```
+
+### **Backend (FastAPI + Python)**
+- Ubicado en la carpeta `server/`.
+- Usa `uvicorn` como servidor ASGI.
+- Conectado a MongoDB.
+- Expone el puerto `8000`.
+- Se ejecuta con:
+  ```sh
+  uvicorn main:app --host 0.0.0.0 --port 8000
+  ```
+
+### **MongoDB**
+- Usa la imagen oficial `mongo:latest`.
+- Guarda los datos en un volumen persistente `mongo_data`.
+- Expone el puerto `27017`.
+
+## 🛠 Comandos Útiles
+
+### **Levantar y reconstruir los contenedores**
+```sh
+docker-compose up --build
+```
+
+### **Detener los contenedores**
+```sh
+docker-compose down
+```
+
+### **Eliminar los volúmenes (borrar datos de MongoDB)**
+```sh
+docker-compose down -v
+```
+
+### **Ver logs en tiempo real**
+```sh
+docker-compose logs -f
 ```
