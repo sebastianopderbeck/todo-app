@@ -13,9 +13,13 @@ async def get_task_by_id(task_id: str):
     return None
 
 async def create_task(task: Task):
-    task_dict = task.dict(by_alias=True, exclude={"id"})
-    result = tasks_collection.insert_one(task_dict)
-    return {**task_dict, "id": str(result.inserted_id)}
+    task_dict = task.dict(by_alias=True, exclude={"id"})  # Convertir Task a dict sin `id`
+    result = tasks_collection.insert_one(task_dict)  # Insertar en MongoDB
+
+    # 🔹 Agregar el ID generado por MongoDB como string
+    task_dict["_id"] = str(result.inserted_id)
+
+    return task_dict  # ✅ Retornar solo datos serializables
 
 async def update_task(task_id: str, task_data: dict):
     tasks_collection.update_one({"_id": ObjectId(task_id)}, {"$set": task_data})

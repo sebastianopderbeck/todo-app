@@ -13,6 +13,12 @@ async def get_task(task_id: str):
     return task
 
 async def add_task(task: Task):
+    if not task.title.strip():
+        raise HTTPException(status_code=400, detail="Title cannot be empty")
+
+    if task.status not in ["pending", "in-progress", "completed"]:
+        raise HTTPException(status_code=400, detail="Invalid status")
+
     return await create_task(task)
 
 async def edit_task(task_id: str, task_data: dict):
