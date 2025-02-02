@@ -16,8 +16,17 @@ async def add_task(task: Task):
     return await create_task(task)
 
 async def edit_task(task_id: str, task_data: dict):
-    task = Task(**task_data)
-    return await update_task(task_id, task.model_dump(exclude_unset=True))
+    task_data.pop("_id", None)
+
+    if not task_data:
+        raise HTTPException(status_code=400, detail="No fields provided for update")
+
+    try:
+        task = Task.construct(**task_data)
+    except ValidationError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+    return await update_task(task_id, task.dict(exclude_unset=True))
 
 async def remove_task(task_id: str):
     task = await get_task_by_id(task_id)

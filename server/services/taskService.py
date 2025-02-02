@@ -8,7 +8,8 @@ async def get_tasks():
 async def get_task_by_id(task_id: str):
     task = tasks_collection.find_one({"_id": ObjectId(task_id)})
     if task:
-        return Task(**task, id=str(task["_id"]))
+        task["_id"] = str(task["_id"])
+        return Task(**task)
     return None
 
 async def create_task(task: Task):
