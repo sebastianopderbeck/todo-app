@@ -3,7 +3,7 @@ import { Button, FormControl, InputLabel, MenuItem, Select, TextField } from "@m
 import { AddCircle } from "@mui/icons-material";
 import { useState } from "react";
 import {useTasks} from "../context/taskProvider";
-import {Task} from "../types/taskTypes";
+import {Task, TaskStatus} from "../types/taskTypes";
 
 const DEFAULT_TASK: Omit<Task, "_id"> = { title: "", description: "", status: "pending", order: 0 };
 

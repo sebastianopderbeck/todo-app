@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import { TextField, Button } from "@mui/material";
 import { useTasks } from "../context/taskProvider";
-import { Task } from "../types/taskTypes";
+import {Task, TaskStatus} from "../types/taskTypes";
 import {STATUSES} from "./taskList";
 import _ from "lodash";
 
@@ -85,7 +85,7 @@ export const TaskDetail: React.FC<TaskDetailProps> = ({ task, isEditing, setIsEd
 
             {isEditing && (
                 <div className="flex justify-center gap-2 mt-4">
-                    {_.filter(STATUSES, (status) => task.status != status).map((status) => (
+                    {_.filter(STATUSES, (status: TaskStatus) => task.status != status).map((status: TaskStatus) => (
                         <button
                             key={status}
                             className={`px-4 py-2 rounded-md text-xs font-normal transition-colors capitalize cursor-pointer ${

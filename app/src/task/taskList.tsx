@@ -31,8 +31,8 @@ export const TaskRows: React.FC = () => {
         const { active, over } = event;
         if (!over || active.id === over.id) return;
 
-        const activeTask = tasks.find((t) => t._id === active.id);
-        const overTask = tasks.find((t) => t._id === over.id);
+        const activeTask = tasks.find((t: Task) => t._id === active.id);
+        const overTask = tasks.find((t: Task) => t._id === over.id);
 
         if (!activeTask || !overTask) return;
 
