@@ -5,20 +5,20 @@ import { useState } from "react";
 import {useTasks} from "../context/taskProvider";
 import {Task} from "../types/taskTypes";
 
-const DEFAULT_TASK: Omit<Task, "id"> = { title: "", description: "", status: "pending", order: 0 };
+const DEFAULT_TASK: Omit<Task, "_id"> = { title: "", description: "", status: "pending", order: 0 };
 
 export const NewTask: React.FC = () => {
-    const [newTask, setNewTask] = useState<Omit<Task, "id">>(DEFAULT_TASK);
-    const { createTask } = useTasks();
+    const [newTask, setNewTask] = useState<Omit<Task, "_id">>(DEFAULT_TASK);
+    const { addTask } = useTasks();
     const canAdd = !newTask.title || !newTask.status;
 
     const handleCreate = () => {
-        createTask(newTask);
+        addTask(newTask);
         setNewTask(DEFAULT_TASK);
     };
 
     return (
-        <div className="flex gap-4">
+        <div className="grid grid-cols-3 gap-4">
             <TextField
                 label="Title"
                 variant="outlined"
@@ -33,28 +33,31 @@ export const NewTask: React.FC = () => {
                 onChange={(e) => setNewTask({ ...newTask, description: e.target.value })}
                 className="w-full"
             />
-            <FormControl className="!max-w-48" fullWidth variant="standard">
-                <InputLabel id="select-status">Status</InputLabel>
-                <Select
-                    labelId="select-status"
-                    id="select-status-id"
-                    value={newTask.status}
-                    onChange={(e) => setNewTask({ ...newTask, status: e.target.value as TaskStatus })}
+            <div className="flex gap-4">
+                <FormControl className="!min-w-48" fullWidth variant="standard">
+                    <InputLabel id="select-status">Status</InputLabel>
+                    <Select
+                        labelId="select-status"
+                        id="select-status-id"
+                        value={newTask.status}
+                        onChange={(e) => setNewTask({ ...newTask, status: e.target.value as TaskStatus })}
+                    >
+                        <MenuItem value="pending">Pending</MenuItem>
+                        <MenuItem value="in-progress">In Progress</MenuItem>
+                        <MenuItem value="completed">Completed</MenuItem>
+                    </Select>
+                </FormControl>
+                <Button
+                    className="!min-w-36"
+                    variant="contained"
+                    onClick={handleCreate}
+                    startIcon={<AddCircle />}
+                    disabled={canAdd}
                 >
-                    <MenuItem value="pending">Pending</MenuItem>
-                    <MenuItem value="in-progress">In Progress</MenuItem>
-                    <MenuItem value="completed">Completed</MenuItem>
-                </Select>
-            </FormControl>
-            <Button
-                className="!min-w-36"
-                variant="contained"
-                onClick={handleCreate}
-                startIcon={<AddCircle />}
-                disabled={canAdd}
-            >
-                Add Task
-            </Button>
+                    Add Task
+                </Button>
+            </div>
+
         </div>
     );
 };

@@ -3,24 +3,18 @@ import { useDrag } from "react-dnd";
 import { TextField, Button } from "@mui/material";
 import { DragIndicator } from "@mui/icons-material";
 import {useTasks} from "../context/taskProvider";
+import {Task} from "../types/taskTypes";
 
-interface TaskProps {
-    id: string;
-    title: string;
-    description: string;
-    status: string;
-}
-
-export const TaskDetail: React.FC<TaskProps> = ({ id, title, description, status }) => {
-    const { updateTask, deleteTask } = useTasks();
+export const TaskDetail: React.FC<Task> = ({ _id, title, description, status }) => {
+    const { modifyTask, removeTask } = useTasks();
     const [isEditing, setIsEditing] = useState(false);
-    const [editedTask, setEditedTask] = useState({ id, title, description, status });
-    const [originalTask, setOriginalTask] = useState({ id, title, description, status });
+    const [editedTask, setEditedTask] = useState({ _id, title, description, status });
+    const [originalTask, setOriginalTask] = useState({ _id, title, description, status });
     const taskRef = useRef<HTMLDivElement>(null);
 
     const [{ isDragging }, drag] = useDrag(() => ({
         type: "TASK",
-        item: { id, title, description, status },
+        item: { _id, title, description, status },
         collect: (monitor) => ({
             isDragging: !!monitor.isDragging(),
         }),
@@ -32,7 +26,7 @@ export const TaskDetail: React.FC<TaskProps> = ({ id, title, description, status
     };
 
     const handleSave = () => {
-        updateTask(editedTask);
+        modifyTask(editedTask);
         setIsEditing(false);
     };
 
@@ -67,7 +61,6 @@ export const TaskDetail: React.FC<TaskProps> = ({ id, title, description, status
             }`}
             onClick={() => !isEditing && setIsEditing(true)}
         >
-            {/* Drag Handle separado */}
             {!isEditing && (
                 <div ref={drag} className="cursor-move p-2" onClick={(e) => e.stopPropagation()}>
                     <DragIndicator className="text-gray-500" />
@@ -111,7 +104,7 @@ export const TaskDetail: React.FC<TaskProps> = ({ id, title, description, status
                         Cancel
                     </Button>
                     <Button
-                        onClick={() => deleteTask(id)}
+                        onClick={() => removeTask(_id)}
                         color="error"
                         variant="contained"
                         className="text-sm !capitalize"

@@ -20,9 +20,10 @@ export const TaskProvider = ({ children }: { children: React.ReactNode }) => {
         }
     };
 
-    const addTask = async (task: Omit<Task, "id">) => {
+    const addTask = async (task: Omit<Task, "_id">) => {
         try {
             const newTask = await createTask(task);
+            console.log(newTask)
             setTasks([...tasks, newTask]);
         } catch (error) {
             console.error("Error creating task:", error);
@@ -32,16 +33,16 @@ export const TaskProvider = ({ children }: { children: React.ReactNode }) => {
     const modifyTask = async (updatedTask: Task) => {
         try {
             const task = await updateTask(updatedTask);
-            setTasks((prevTasks) => prevTasks.map((t) => (t.id === task.id ? task : t)));
+            setTasks((prevTasks) => prevTasks.map((t) => (t._id === task._id ? task : t)));
         } catch (error) {
             console.error("Error updating task:", error);
         }
     };
 
-    const removeTask = async (id: string) => {
+    const removeTask = async (_id: string) => {
         try {
-            await deleteTask(id);
-            setTasks(tasks.filter((task) => task.id !== id));
+            await deleteTask(_id);
+            setTasks(tasks.filter((task) => task._id !== _id));
         } catch (error) {
             console.error("Error deleting task:", error);
         }

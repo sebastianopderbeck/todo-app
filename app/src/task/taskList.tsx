@@ -44,24 +44,24 @@ export const TaskRows: React.FC = () => {
 };
 
 const TaskColumn: React.FC<TaskColumnProps> = ({ status, tasks }) => {
-    const { updateTask } = useTasks();
+    const { modifyTask } = useTasks();
 
     const [, drop] = useDrop(() => ({
         accept: "TASK",
         drop: (draggedTask: Task) => {
             if (draggedTask.status !== status) {
-                updateTask({ ...draggedTask, status });
+                modifyTask({ ...draggedTask, status });
             }
         },
     }));
 
     return (
-        <div ref={drop} className="flex flex-col gap-2 p-3 border border-gray-300 rounded-lg min-h-[150px]">
+        <div key={status} ref={drop} className="flex flex-col gap-2 p-3 border border-gray-300 rounded-lg min-h-[150px]">
             <h3 className={`text-sm font-semibold text-gray-700 uppercase ${statusColors[status]} px-3 py-1 rounded-md`}>
                 {status}
             </h3>
             {tasks.length > 0 ? (
-                tasks.map((task: Task) => <TaskDetail key={task.id} {...task} />)
+                tasks.map((task: Task) => <TaskDetail key={task._id} {...task} />)
             ) : (
                 <div className="text-gray-400 text-sm italic text-center p-4">
                     Drop Here
