@@ -3,7 +3,7 @@ from database import tasks_collection
 from bson import ObjectId
 
 async def get_tasks():
-    return [Task(**task, id=str(task["_id"])) for task in tasks_collection.find()]
+    return [Task(**{**task, "_id": str(task["_id"])}) for task in tasks_collection.find()]
 
 async def get_task_by_id(task_id: str):
     task = tasks_collection.find_one({"_id": ObjectId(task_id)})
