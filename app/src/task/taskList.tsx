@@ -7,7 +7,7 @@ import { Task } from "../types/taskTypes";
 import { SortableTaskItem } from "./sortableTaskItem";
 import _ from "lodash";
 
-const STATUSES = ["pending", "in-progress", "completed"];
+export const STATUSES = ["pending", "in-progress", "completed"];
 
 export const TaskList = () => (
     <div className="p-6 space-y-4">
