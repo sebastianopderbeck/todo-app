@@ -1,93 +1,94 @@
-# Proyecto con Docker Compose
+# Project with Docker Compose
 
-Este proyecto utiliza **Docker Compose** para configurar y ejecutar un entorno de desarrollo completo con **Frontend (Bun + React)**, **Backend (FastAPI + Python)** y **MongoDB**.
+This project uses **Docker Compose** to set up and run a complete development environment with **Frontend (Bun + React)**, **Backend (FastAPI + Python)**, and **MongoDB**.
 
-## 📌 Requisitos previos
-Asegúrate de tener instalado en tu sistema:
+## 📌 Prerequisites
+Make sure you have installed:
 - [Docker](https://www.docker.com/get-started)
 - [Docker Compose](https://docs.docker.com/compose/install/)
 
-## 📂 Estructura del Proyecto
+## 📂 Project Structure
 ```
 ./
-├── app/            # Código del frontend (Bun + React)
-│   ├── Dockerfile  # Dockerfile del frontend
+├── app/            # Frontend code (Bun + React)
+│   ├── Dockerfile  # Frontend Dockerfile
 │   ├── src/
 │   ├── public/
 │   └── package.json
 │
-├── server/         # Código del backend (FastAPI + Python)
-│   ├── Dockerfile  # Dockerfile del backend
-│   ├── main.py     # Archivo principal de FastAPI
-│   ├── requirements.txt  # Dependencias de Python
+├── server/         # Backend code (FastAPI + Python)
+│   ├── Dockerfile  # Backend Dockerfile
+│   ├── main.py     # Main FastAPI file
+│   ├── requirements.txt  # Python dependencies
 │   └── ...
 │
-├── docker-compose.yml  # Definición de los servicios con Docker Compose
-└── README.md  # Documentación del proyecto
+├── docker-compose.yml  # Service definitions with Docker Compose
+└── README.md  # Project documentation
 ```
 
-## 🚀 Cómo ejecutar el proyecto
+## 🚀 How to Run the Project
 
-1. **Clonar el repositorio**
+1. **Clone the repository**
    ```sh
-   git clone https://github.com/tu-usuario/tu-repo.git
-   cd tu-repo
+   git clone https://github.com/sebastianopderbeck/todo-app.git
+   cd your-repo
    ```
 
-2. **Levantar los contenedores**
+2. **Start the containers**
    ```sh
    docker-compose up --build
    ```
 
-3. **Acceder a las aplicaciones**
+3. **Access the applications**
     - **Frontend:** [http://localhost:9001](http://localhost:9001)
     - **Backend (FastAPI docs):** [http://localhost:8000/docs](http://localhost:8000/docs)
-    - **MongoDB (puerto expuesto):** `27017`
+    - **MongoDB (exposed port):** `27017`
 
-## 📦 Descripción de los Servicios
+## 📦 Service Description
 
 ### **Frontend (Bun + React)**
-- Ubicado en la carpeta `app/`.
-- Usa el `bun` como gestor de paquetes y entorno de ejecución.
-- Expone el puerto `9001`.
-- Se ejecuta con:
+- Located in the `app/` folder.
+- Uses `bun` as the package manager and runtime.
+- Exposes port `9001`.
+- Runs with:
   ```sh
   bun run dev
   ```
 
 ### **Backend (FastAPI + Python)**
-- Ubicado en la carpeta `server/`.
-- Usa `uvicorn` como servidor ASGI.
-- Conectado a MongoDB.
-- Expone el puerto `8000`.
-- Se ejecuta con:
+- Located in the `server/` folder.
+- Uses `uvicorn` as the ASGI server.
+- Connected to MongoDB.
+- Exposes port `8000`.
+- Runs with:
   ```sh
   uvicorn main:app --host 0.0.0.0 --port 8000
   ```
 
 ### **MongoDB**
-- Usa la imagen oficial `mongo:latest`.
-- Guarda los datos en un volumen persistente `mongo_data`.
-- Expone el puerto `27017`.
+- Uses the official `mongo:latest` image.
+- Stores data in a persistent volume `mongo_data`.
+- Exposes port `27017`.
 
-## 🛠 Comandos Útiles
+## 🛠 Useful Commands
 
-### **Levantar y reconstruir los contenedores**
+### **Start and rebuild containers**
 ```sh
 docker-compose up --build
 ```
 
-### **Detener los contenedores**
+### **Stop containers**
 ```sh
 docker-compose down
 ```
 
-### **Eliminar los volúmenes (borrar datos de MongoDB)**
+### **Remove volumes (delete MongoDB data)**
 ```sh
 docker-compose down -v
 ```
 
-### **Ver logs en tiempo real**
+### **View real-time logs**
 ```sh
 docker-compose logs -f
 ```
+
