@@ -24,7 +24,7 @@ export const SortableTaskItem: React.FC<{ task: Task }> = ({ task }) => {
                 {...listeners}
                 {...attributes}
                 className="cursor-grab hover:bg-gray-100 flex items-center justify-center"
-                onClick={(e) => e.stopPropagation()} // Para evitar activar edición al mover
+                onClick={(e) => e.stopPropagation()}
             >
                 <DragIndicator className="text-gray-500"/>
             </div>}

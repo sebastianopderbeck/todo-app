@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="eece09e8-82cf-4d4e-b401-5008d686cc20" name="Changes" comment="" />
+    <list default="true" id="eece09e8-82cf-4d4e-b401-5008d686cc20" name="Changes" comment="fix: test routes and requirements">
+      <change afterPath="$PROJECT_DIR$/app/public/task.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/public/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/public/vite.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/task/sortableTaskItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/task/sortableTaskItem.tsx" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -10,9 +20,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 8
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
   <component name="ProjectId" id="2sOFFxav1UOHKknQXYoFsYiJSze" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -27,6 +37,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "ts.external.directory.path": "/Applications/WebStorm.app/Contents/plugins/javascript-plugin/jsLanguageServicesImpl/external",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -47,9 +58,76 @@
       <updated>1738318616400</updated>
       <workItem from="1738318617753" duration="286000" />
     </task>
+    <task id="LOCAL-00001" summary="fix: update task on server">
+      <option name="closed" value="true" />
+      <created>1738499156717</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1738499156717</updated>
+    </task>
+    <task id="LOCAL-00002" summary="feat: error handling and validation on model">
+      <option name="closed" value="true" />
+      <created>1738499789780</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1738499789780</updated>
+    </task>
+    <task id="LOCAL-00003" summary="fix: sortable orders in taskList">
+      <option name="closed" value="true" />
+      <created>1738509987082</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1738509987082</updated>
+    </task>
+    <task id="LOCAL-00004" summary="feat: adding sortableTaskItem">
+      <option name="closed" value="true" />
+      <created>1738510000347</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1738510000347</updated>
+    </task>
+    <task id="LOCAL-00005" summary="feat: adding change status on taskList">
+      <option name="closed" value="true" />
+      <created>1738510888132</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1738510888132</updated>
+    </task>
+    <task id="LOCAL-00006" summary="feat: update readme">
+      <option name="closed" value="true" />
+      <created>1738511170000</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1738511170000</updated>
+    </task>
+    <task id="LOCAL-00007" summary="fix: test routes and requirements">
+      <option name="closed" value="true" />
+      <created>1738525675137</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1738525675137</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="fix: update task on server" />
+    <MESSAGE value="feat: error handling and validation on model" />
+    <MESSAGE value="fix: sortable orders in taskList" />
+    <MESSAGE value="feat: adding sortableTaskItem" />
+    <MESSAGE value="feat: adding change status on taskList" />
+    <MESSAGE value="feat: update readme" />
+    <MESSAGE value="fix: test routes and requirements" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: test routes and requirements" />
   </component>
 </project>
