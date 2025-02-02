@@ -1,6 +1,8 @@
 # Usa la imagen oficial de Python
 FROM python:3.10
 
+ENV PYTHONPATH=/server
+
 # Establece el directorio de trabajo
 WORKDIR /app
 
